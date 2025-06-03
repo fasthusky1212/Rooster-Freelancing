@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Canvas and Logos</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+      background: #111;
+    }
+
+    .gallery {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .gallery img {
+      max-width: 150px;
+      height: auto;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="3dCanvas" width="668" height="857"></canvas>
+
+  <h2>Supported by:</h2>
+
+  <div class="gallery">
+    <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_03.png" alt="Logo 1" />
+    <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_05.png" alt="Logo 2" />
+    <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_02.png" alt="Logo 3" />
+    <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_04.png" alt="Logo 4" />
+  </div>
+
+  <!-- Optional: Insert your Three.js script below if needed -->
+  <script>
+    const canvas = document.getElementById('3dCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'white';
+    ctx.font = '30px sans-serif';
+    ctx.fillText('3D Canvas Placeholder', 100, 100);
+    // You can replace this with Three.js rendering code
+  </script>
+</body>
+</html>
