@@ -3,46 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Canvas and Logos</title>
+  <title>Animated Background + Canvas</title>
   <style>
     body {
       margin: 0;
-      background: #000;
-      color: white;
+      overflow-x: hidden;
       font-family: Arial, sans-serif;
-      text-align: center;
+      color: white;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 40px);
+      grid-auto-rows: 40px;
+      z-index: -1;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 35px solid #0ff;
+      transform: rotate(0deg);
+      animation: rotateTri 6s linear infinite;
+    }
+
+    @keyframes rotateTri {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animated-bg:hover .triangle {
+      animation: rotateTriHover 2s linear infinite;
+    }
+
+    @keyframes rotateTriHover {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
     }
 
     canvas {
       display: block;
-      margin: 0 auto;
-      background: #111;
+      margin: 100px auto 20px;
+      background: transparent;
+      z-index: 1;
+      position: relative;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
     }
 
     .gallery {
-      margin-top: 30px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
+      margin: 20px;
     }
 
     .gallery img {
       max-width: 150px;
       height: auto;
     }
-
-    h2 {
-      margin-top: 40px;
-      font-weight: 500;
-    }
   </style>
 </head>
 <body>
+
+  <!-- Triangular animated background -->
+  <div class="animated-bg" id="background"></div>
+
+  <!-- Canvas area -->
   <canvas id="3dCanvas" width="668" height="857"></canvas>
 
   <h2>Supported by:</h2>
-
   <div class="gallery">
     <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_03.png" alt="Logo 1" />
     <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_05.png" alt="Logo 2" />
@@ -50,14 +92,26 @@
     <img src="https://zeroinai.com/wp-content/uploads/2025/04/inner_logo_white_04.png" alt="Logo 4" />
   </div>
 
-  <!-- Optional: Insert your Three.js script below if needed -->
+  <!-- Optional: basic canvas placeholder -->
   <script>
     const canvas = document.getElementById('3dCanvas');
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = 'white';
     ctx.font = '30px sans-serif';
     ctx.fillText('3D Canvas Placeholder', 100, 100);
-    // You can replace this with Three.js rendering code
   </script>
+
+  <!-- Fill background with triangles -->
+  <script>
+    const bg = document.getElementById('background');
+    const triangleCount = Math.floor(window.innerWidth / 40) * Math.floor(window.innerHeight / 40);
+
+    for (let i = 0; i < triangleCount; i++) {
+      const tri = document.createElement('div');
+      tri.className = 'triangle';
+      bg.appendChild(tri);
+    }
+  </script>
+
 </body>
 </html>
